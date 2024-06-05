@@ -13,15 +13,3 @@ CREATE TABLE IF NOT EXISTS Expenses (
     category VARCHAR(50) ,
     FOREIGN KEY (userID) REFERENCES Users(userID)
 );
--- CREATE TABLE IF NOT EXISTS Categories (
---     categoryID INT PRIMARY KEY,
---     categoryname VARCHAR(255)
--- );
-
--- CREATE TABLE IF NOT EXISTS BelongTo (
---     expenseID INT,
---     categoryID INT,
---     PRIMARY KEY (expenseID, categoryID),
---     FOREIGN KEY (expenseID) REFERENCES EXPENSES(expenseID),
---     FOREIGN KEY (categoryID) REFERENCES Categories(categoryID)
--- );
