@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <main>
+        <div class="title">
+            <h2>Account : {{ session.username }}</h2>
+        </div>
+        <form action="/logout" method="post" class="expense-form">
+            <button type="submit">Logout</button>
+    </main>
+{% endblock content %}

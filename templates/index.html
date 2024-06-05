@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<main>
+    <div class="title">
+        <h2>Add Expense</h2>
+    </div>
+
+    <form action="/add_expense" method="POST" class="expense-form">
+        <input type="text" name="name" id="name" placeholder="Expense Name" required>
+        <input type="number" name="amount" id="amount" placeholder="Expense Amount" required>
+        <input type="date" name="date" id="date" required>
+        <select name="category" id="category" required>
+            <option value="">Select Category</option>
+            <option value="Food">Food</option>
+            <option value="Housing">Housing</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="CreatedExpenses container">
+        <div class="title">
+            <h2>
+                <form action="/" method="GET">
+                    <select name="expense-filter" id="expense-filter" required onchange="this.form.submit()">
+                        <option value="all" {% if filter_value == 'all' %}selected{% endif %}>All Expenses</option>
+                        <option value="Today" {% if filter_value == 'Today' %}selected{% endif %}>Today</option>
+                        <option value="This Month" {% if filter_value == 'This Month' %}selected{% endif %}>This Month</option>
+                        <option value="Specific Date" {% if filter_value == 'Specific Date' %}selected{% endif %}>Specific Date</option>
+                    </select>
+                    {% if filter_value == 'Specific Date' %}
+                    <div id="specific-date-input">
+                        <label for="specific-date">Enter Date:</label>
+                        <input type="date" id="specific-date" name="specific-date" value="{{ specific_date }}">
+                        <button type="submit">Submit</button>
+                    </div>
+                    {% endif %}
+                    
+                </form>
+            </h2>
+        </div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Date</th> 
+                <th>Category</th>
+            </tr>
+            {% for expense in expenses %}
+            <tr class="expenses">
+                <td><a href="{{ url_for('edit_expense', expense_id=expense[0]) }}">{{ expense[2] }}</a></td>
+                <td><a href="{{ url_for('edit_expense', expense_id=expense[0]) }}">{{ expense[3] }}</a></td>
+                <td><a href="{{ url_for('edit_expense', expense_id=expense[0]) }}">{{ expense[4] }}</a></td>
+                <td><a href="{{ url_for('edit_expense', expense_id=expense[0]) }}">{{ expense[5] }}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="total-box">
+            <div class="total">
+            Total spent: ${{ total_amount }}
+        </div>
+    
+    </div>
+</main>
+
+{% endblock content %}
+
