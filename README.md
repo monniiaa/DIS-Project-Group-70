@@ -10,7 +10,6 @@ Run the code below to install the necessary modules.
 
 4. ## RUN APPLICATION
 5. To run the database execute:
-6. 
 7.     python server.py
 
 8. ## INTERACT WITH DATABASE
